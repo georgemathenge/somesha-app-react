@@ -14,8 +14,27 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import AdbIcon from "@mui/icons-material/Adb";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CssBaseline} from '@mui/material';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
+import { RouterProvider } from 'react-router';
+
 const pages = ["Home", "Stories", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+
+const getTheme = (mode) => createTheme({
+  palette: {
+    mode: mode, // 'light' or 'dark'
+    primary: {
+      main: '#86B6F6', // Customize your primary color
+      light: '#CED5DC', // Customize your primary light color
+    },
+    secondary: {
+      main: '#dc004e', // Customize your secondary color
+    },
+  },
+});
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -90,7 +109,7 @@ function NavBar() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}
-            >
+                          >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
@@ -102,7 +121,7 @@ function NavBar() {
                     </Link>
                   </Typography>
                 </MenuItem>
-              ))}
+                      ))}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
