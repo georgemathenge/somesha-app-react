@@ -19,6 +19,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
 import { genres, steps } from "../data";
+import { BASEURL } from "./api-service.js";
 
 function NewStory() {
   const [activeStep, setActiveStep] = useState(0);
@@ -180,7 +181,7 @@ function NewStory() {
     setLoading(true); // Set loading state to false when the request completes
 
     axios
-      .post("http://localhost:4000/api/v1/query/gemini/ai", formData, {
+      .post(` ${BASEURL}/api/v1/query/gemini/ai`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
