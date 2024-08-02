@@ -12,7 +12,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {BASEURL} from "./api-service.js"
+import {BASEURL} from "./api-service.js";
 const FeaturedStories = () => {
 
   const [data, setData] = useState([]);
@@ -105,7 +105,7 @@ const FeaturedStories = () => {
       <Container>
         {loading && <div>Loading...</div>}
         {error && <div>Error: {error.message}</div>}
-        {!loading && !error && (
+        {data && (
           <Grid
             container
             rowSpacing={1}
