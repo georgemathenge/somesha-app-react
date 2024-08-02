@@ -94,6 +94,7 @@ function NewStory() {
       };
     });
   };
+ 
 
   //  const [filteredGenres, setFilteredGenres] = useState(genres);
 
@@ -128,6 +129,13 @@ function NewStory() {
     if (activeStep === 0) {
       if (!formData.fullName) {
         newErrors.name = "Name is required";
+      } else if (!/^[A-Za-z\s]+$/.test(formData.fullName)) {
+        newErrors.name = "Name must contain only alphabetic characters";
+      }
+      if (!formData.preferredName) {
+        newErrors.preferredName = "Preferred Name is required";
+      } else if (!/^[A-Za-z\s]+$/.test(formData.preferredName)) {
+        newErrors.preferredName = "Preferred Name must contain only alphabetic characters";
       }
       if (!formData.age) {
         newErrors.age = "Age is required";
@@ -144,14 +152,13 @@ function NewStory() {
       if (!formData.favouriteTheme) {
         newErrors.theme = "Please Select a theme";
       }
+      
     }
-    // else if (activeStep === 2) {
-    //   if (!formData.email) {
-    //     newErrors.email = "Email is required";
-    //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    //     newErrors.email = "Email address is invalid";
-    //   }
-    // }
+    else if (activeStep === 2) {
+    if (!/^[A-Za-z\s]+$/.test(formData.preferredMainCharacter)) {
+        newErrors.preferredMainCharacter = "Preferred Main Name must contain only alphabetic characters";
+      }
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -208,7 +215,7 @@ function NewStory() {
           <form>
             <TextField
               name="fullName"
-              label="Full Names"
+              label="Full Names *"
               variant="outlined"
               fullWidth
               type="text"
@@ -216,20 +223,24 @@ function NewStory() {
               value={formData.fullName}
               onChange={handleChange}
               className="custom-textfield"
-            />
+              helperText={errors.name}
+              error={Boolean(errors.name)}
+              />
             <TextField
               name="preferredName"
-              label="Preferred Name"
+              label="Preferred Name *"
               variant="outlined"
               fullWidth
               margin="normal"
               value={formData.preferredName}
               onChange={handleChange}
               className="custom-textfield"
+              helperText={errors.preferredName}
+              error={Boolean(errors.preferredName)}
             />
             <TextField
               name="age"
-              label="Age"
+              label="Age *"
               variant="outlined"
               fullWidth
               margin="normal"
@@ -264,7 +275,7 @@ function NewStory() {
               margin="normal"
               error={Boolean(errors.genre)}
             >
-              <InputLabel id="genre-label">Favourite Genre</InputLabel>
+              <InputLabel id="genre-label">Favourite Genre *</InputLabel>
               <Select
                 name="favouriteGenre"
                 labelId="genre-label"
@@ -290,7 +301,7 @@ function NewStory() {
                 margin="normal"
                 error={Boolean(errors.subGenre)}
               >
-                <InputLabel id="subgenre-label">Favourite SubGenre</InputLabel>
+                <InputLabel id="subgenre-label">Favourite SubGenre *</InputLabel>
                 <Select
                   name="favouriteSubGenre"
                   labelId="subgenre-label"
@@ -324,7 +335,7 @@ function NewStory() {
                 margin="normal"
                 error={Boolean(errors.theme)}
               >
-                <InputLabel id="theme-label">Themes</InputLabel>
+                <InputLabel id="theme-label">Themes *</InputLabel>
                 <Select
                   name="favouriteTheme"
                   labelId="theme-label"
@@ -380,6 +391,8 @@ function NewStory() {
               value={formData.preferredMainCharacter}
               onChange={handleChange}
               className="custom-textfield"
+              helperText={errors.preferredMainCharacter}
+              error={Boolean(errors.preferredMainCharacter)}
             />
           </form>
         );
@@ -605,3 +618,4 @@ function NewStory() {
 }
 
 export default NewStory;
+

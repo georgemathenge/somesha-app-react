@@ -21,12 +21,40 @@ const getTheme = (mode) => createTheme({
     secondary: {
       main: '#dc004e', // Customize your secondary color
     },
+    background: {
+      default: mode === 'light' ? '#fff' : '#121212',
+      paper: mode === 'light' ? '#fff' : '#121212',
+    },
+    text: {
+      primary: mode === 'light' ? '#000' : '#fff',
+    },
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiInputBase-root': {
+            color: mode === 'light' ? '#000' : '#fff',
+            backgroundColor: mode === 'light' ? '#fff' : '#121212',
+          },
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: mode === 'light' ? '#000' : '#fff',
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: mode === 'light' ? '#000' : '#fff',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: mode === 'light' ? '#000' : '#fff',
+          },
+        },
+      },
+    },
   },
 });
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/"  element={<Root />}>
+    <Route path="/" element={<Root />}>
       <Route index element={<Home />} />
       <Route path='/create-new' element={<NewStory />} />
       <Route path="/view-story/:storyId" element={<ViewStory />} />
