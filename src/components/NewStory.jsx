@@ -18,7 +18,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
-import { genres, steps } from "../data";
+import { genres, steps, mainCharacters } from "../data";
 import { BASEURL } from "./api-service.js";
 
 function NewStory() {
@@ -94,7 +94,6 @@ function NewStory() {
       };
     });
   };
- 
 
   //  const [filteredGenres, setFilteredGenres] = useState(genres);
 
@@ -135,7 +134,8 @@ function NewStory() {
       if (!formData.preferredName) {
         newErrors.preferredName = "Preferred Name is required";
       } else if (!/^[A-Za-z\s]+$/.test(formData.preferredName)) {
-        newErrors.preferredName = "Preferred Name must contain only alphabetic characters";
+        newErrors.preferredName =
+          "Preferred Name must contain only alphabetic characters";
       }
       if (!formData.age) {
         newErrors.age = "Age is required";
@@ -152,11 +152,10 @@ function NewStory() {
       if (!formData.favouriteTheme) {
         newErrors.theme = "Please Select a theme";
       }
-      
-    }
-    else if (activeStep === 2) {
-    if (!/^[A-Za-z\s]+$/.test(formData.preferredMainCharacter)) {
-        newErrors.preferredMainCharacter = "Preferred Main Name must contain only alphabetic characters";
+    } else if (activeStep === 2) {
+      if (!/^[A-Za-z\s]+$/.test(formData.preferredMainCharacter)) {
+        newErrors.preferredMainCharacter =
+          "Preferred Main Name must contain only alphabetic characters";
       }
     }
 
@@ -225,7 +224,7 @@ function NewStory() {
               className="custom-textfield"
               helperText={errors.name}
               error={Boolean(errors.name)}
-              />
+            />
             <TextField
               name="preferredName"
               label="Preferred Name *"
@@ -301,7 +300,9 @@ function NewStory() {
                 margin="normal"
                 error={Boolean(errors.subGenre)}
               >
-                <InputLabel id="subgenre-label">Favourite SubGenre *</InputLabel>
+                <InputLabel id="subgenre-label">
+                  Favourite SubGenre *
+                </InputLabel>
                 <Select
                   name="favouriteSubGenre"
                   labelId="subgenre-label"
@@ -382,7 +383,65 @@ function NewStory() {
       case 2:
         return (
           <form>
-            <TextField
+            <FormControl
+              fullWidth
+              margin="normal"
+              error={Boolean(errors.genre)}
+            >
+              <InputLabel id="genre-label">
+                Main Character Preference *
+              </InputLabel>
+              <Select
+                name="preferredMainCharacter"
+                labelId="genre-label"
+                value={formData.preferredMainCharacter}
+                onChange={handleChange}
+                label="Main Character Preference"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {Object.keys(mainCharacters).map((mainChar) => (
+                  <MenuItem key={mainChar} value={mainChar}>
+                    {mainChar}
+                  </MenuItem>
+                ))}
+              </Select>
+              {errors.genre && <FormHelperText>{errors.genre}</FormHelperText>}
+            </FormControl>
+            {formData.preferredMainCharacter && (
+              <FormControl
+                fullWidth
+                margin="normal"
+                error={Boolean(errors.preferred)}
+              >
+                <InputLabel id="subgenre-label">Favourite Setting *</InputLabel>
+                <Select
+                  name="favouriteSetting"
+                  labelId="subgenre-label"
+                  value={formData.favouriteSetting}
+                  // onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e); // To update formData with selected sub-genre
+                  }}
+                  label="Favourite Setting"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {mainCharacters[formData.preferredMainCharacter].map((theme) => (
+                    <MenuItem key={theme} value={theme}>
+                      {theme}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {errors.subGenre && (
+                  <FormHelperText>{errors.subGenre}</FormHelperText>
+                )}
+              </FormControl>
+            )}
+
+            {/* <TextField
               name="preferredMainCharacter"
               label="Main Character Preference"
               variant="outlined"
@@ -393,10 +452,9 @@ function NewStory() {
               className="custom-textfield"
               helperText={errors.preferredMainCharacter}
               error={Boolean(errors.preferredMainCharacter)}
-            />
+            /> */}
           </form>
         );
-      case 3:
         return (
           <form>
             <TextField
@@ -421,7 +479,7 @@ function NewStory() {
             />
           </form>
         );
-      case 4:
+      case 3:
         return (
           <form>
             <TextField
@@ -447,7 +505,7 @@ function NewStory() {
             />
           </form>
         );
-      case 5:
+      case 4:
         return (
           <form>
             <TextField
@@ -618,4 +676,3 @@ function NewStory() {
 }
 
 export default NewStory;
-

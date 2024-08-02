@@ -261,7 +261,48 @@ export const genres = {
             "Enchanting settings",
         ],
     },
+
 };
+
+export const mainCharacters= {
+    King: [
+        "Humor and wit",
+        "Happy endings",
+        "Romantic entanglements",
+        "Social satire",
+        "Light-hearted themes",
+    ],
+    Queen: [
+        "Downfall of protagonists",
+        "Fatal flaws",
+        "Emotional suffering",
+        "Moral lessons",
+        "Catastrophic events",
+    ],
+    Carpenter: [
+        "Mix of humor and tragedy",
+        "Complex characters",
+        "Ironic situations",
+        "Emotional depth",
+        "Mixed tone",
+    ],
+    Nurse: [
+        "Exaggerated situations",
+        "Physical comedy",
+        "Mistaken identities",
+        "Slapstick humor",
+        "Ridiculous scenarios",
+    ],
+    Teacher: [
+        "Exaggerated emotions",
+        "Clear moral distinctions",
+        "Sensational plots",
+        "Stock characters",
+        "Dramatic conflicts",
+    ],
+}
+
+
 export const steps = [
     "Basic Information",
     "Reading Preference",
