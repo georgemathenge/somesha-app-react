@@ -12,7 +12,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import {BASEURL} from "./api-service.js"
 const FeaturedStories = () => {
 
   const [data, setData] = useState([]);
@@ -25,7 +25,7 @@ const FeaturedStories = () => {
       try {
         // Replace this URL with your actual API endpoint
         const response = await axios.get(
-          'http://localhost:4000/api/v1/somesha/app/get/stories'
+          `${BASEURL}/api/v1/somesha/app/get/stories`
         );
         setData(response.data.data); // Adjust based on your API structure
       } catch (error) {

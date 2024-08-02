@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import { BASEURL } from "./api-service.js";
 const ViewStory = () => {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState([]);
@@ -22,7 +22,8 @@ console.log(storyId)
         try {
           // Replace this URL with your actual API endpoint
           const response = await axios.get(
-            `http://localhost:4000/api/v1/somesha/app/get/stories/${storyId}`
+            // `http://localhost:4000/api/v1/somesha/app/get/stories/${storyId}`
+            `${BASEURL}/api/v1/somesha/app/get/stories/${storyId}`
           );
           setData(response.data.data);// Adjust based on your API structure
      setStatus(response.data.status)
