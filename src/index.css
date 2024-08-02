@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.custom-textfield {
+  margin-bottom: 16px;
+}
+.custom-textfield .MuiInputBase-input {
+  color: black;
+  /* Text color */
+}
+
+.custom-textfield .MuiOutlinedInput-root fieldset {
+  border-color: grey;
+  color: green;
+}
+
+.custom-textfield .MuiOutlinedInput-root:hover fieldset {
+  border-color: blue;
+}
+
+.custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: green;
+}
+.custom-modal {
+ 
+      position: 'absolute';
+        top: '50%';
+        left: '50%';
+        transform: 'translate(-50%, -50%)';
+        width: 400;
+        background-color: 'background.paper';
+        border: '2px solid #000';
+        box-shadow: 24;
+        padding: 4
+   
+    
+}
