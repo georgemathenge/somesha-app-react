@@ -129,6 +129,8 @@ function NewStory() {
 
   const validateStep = () => {
     let newErrors = {};
+    let valid = true;
+
 
     if (activeStep === 0) {
       if (!formData.fullName) {
@@ -142,10 +144,12 @@ function NewStory() {
         newErrors.preferredName =
           "Preferred Name must contain only alphabetic characters";
       }
-      if (!formData.age) {
-        newErrors.age = "Age is required";
-      } else if (isNaN(formData.age)) {
-        newErrors.age = "Age must be a number";
+      if (isNaN(formData.age)) {
+        valid = false;
+        newErrors.age = "Age must be a number.";
+      } else if (formData.age === "" || formData.age >= 100) {
+        valid = false;
+        newErrors.age = "Age must be a number less than 100.";
       }
     } else if (activeStep === 1) {
       if (!formData.favouriteGenre) {
@@ -470,36 +474,12 @@ const isSubGenreSuitable = (subGenre) => {
             /> */}
           </form>
         );
-        return (
-          <form>
-            <TextField
-              name="favouriteSetting"
-              label="Favourite Setting"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              value={formData.favouriteSetting}
-              onChange={handleChange}
-              className="custom-textfield"
-            />
-            <TextField
-              name="timePeriodPreference"
-              label="Time Period Preference"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              value={formData.timePeriodPreference}
-              onChange={handleChange}
-              className="custom-textfield"
-            />
-          </form>
-        );
       case 3:
         return (
           <form>
             <TextField
               name="accessibilityNeeds"
-              label="Accessibility Needs"
+              label="Accessibility Need"
               variant="outlined"
               fullWidth
               margin="normal"
@@ -518,11 +498,6 @@ const isSubGenreSuitable = (subGenre) => {
               onChange={handleChange}
               className="custom-textfield"
             />
-          </form>
-        );
-      case 4:
-        return (
-          <form>
             <TextField
               name="preferredLanguage"
               label="Language"
@@ -535,7 +510,7 @@ const isSubGenreSuitable = (subGenre) => {
             />
           </form>
         );
-
+      
       default:
         return "Unknown step";
     }
