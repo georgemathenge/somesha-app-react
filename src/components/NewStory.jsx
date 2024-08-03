@@ -124,6 +124,8 @@ function NewStory() {
 
   const validateStep = () => {
     let newErrors = {};
+    let valid = true;
+
 
     if (activeStep === 0) {
       if (!formData.fullName) {
@@ -137,10 +139,12 @@ function NewStory() {
         newErrors.preferredName =
           "Preferred Name must contain only alphabetic characters";
       }
-      if (!formData.age) {
-        newErrors.age = "Age is required";
-      } else if (isNaN(formData.age)) {
-        newErrors.age = "Age must be a number";
+      if (isNaN(formData.age)) {
+        valid = false;
+        newErrors.age = "Age must be a number.";
+      } else if (formData.age === "" || formData.age >= 100) {
+        valid = false;
+        newErrors.age = "Age must be a number less than 100.";
       }
     } else if (activeStep === 1) {
       if (!formData.favouriteGenre) {
