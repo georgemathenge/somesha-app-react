@@ -116,9 +116,9 @@ const FeaturedStories = () => {
                 <Card sx={{ maxWidth: 345 }}>
                   <CardMedia
                     component="img"
-                    alt="green iguana"
+                    alt= {story.title}
                     height="200"
-                    image="/story2.jpeg"
+                    image="/story3.jpeg"
                     sx={{ objectFit: "cover" }}
                   />
                   <CardContent>

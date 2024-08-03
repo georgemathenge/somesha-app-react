@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { Box, Container, Typography, Modal } from "@mui/material";
+import { Box, Container, Typography, Modal, Grid, Card, CardActions, CardContent, CardMedia, Button } from "@mui/material";
 import axios from "axios";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { BASEURL } from "./api-service.js";
@@ -22,14 +16,18 @@ const Stories = () => {
 
   const new_story = [
     {
-      title: "My preferments ",
-      desc: "Add A new story from your recent preferences",
+      id: 1, // Add an ID for mapping
+      title: "My preferments",
+      desc: "Add a new story from your recent preference",
       link: "user-preference",
+      bgcolor: "green",
     },
     {
+      id: 2, // Add an ID for mapping
       title: "New preferment",
-      desc: "Add A new story from a new preference",
+      desc: "Add a new story from a new preference",
       link: "create-new",
+      bgcolor: "purple",
     },
   ];
 
@@ -38,7 +36,7 @@ const Stories = () => {
     top: "50%",
     left: "50%",
     display: "block",
-    alignItems:"center",
+    alignItems: "center",
     pt: { xs: 2, sm: 10 },
     transform: "translate(-50%, -50%)",
     width: '100vh',
@@ -86,30 +84,23 @@ const Stories = () => {
           }}
         >
           <Typography variant="h6">Find your stories Here</Typography>
-          {/* <Link to={`/create-new`}> */}
           <Button onClick={handleOpen}>
-            {" "}
-            <AddIcon></AddIcon> Add New
+            <AddIcon /> Add New
           </Button>
-          {/* </Link> */}
         </Box>
         <Container>
-          {loading && <div> Loading...</div>}
+          {loading && <div>Loading...</div>}
           {error && <div>Error: {error.message}</div>}
           {!loading && !error && (
-            <Grid
-              container
-              rowSpacing={1}
-              columnSpacing={{ xs: 1, sm: 2, md: 1 }}
-            >
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
               {data.map((story) => (
                 <Grid item xs={12} sm={6} md={4} key={story.id}>
                   <Card sx={{ maxWidth: 345 }}>
                     <CardMedia
                       component="img"
-                      alt="green iguana"
+                      alt={story.title}
                       height="200"
-                      image="/story2.jpeg"
+                      image="/story6.jpeg"
                       sx={{ objectFit: "cover" }}
                     />
                     <CardContent>
@@ -125,8 +116,8 @@ const Stories = () => {
                     </CardContent>
                     <CardActions>
                       <Button size="small">Share</Button>
-                      <Link to={`/view-story/${story.id}`}>
-                        <Button>View More</Button>
+                      <Link to={`/view-story/${story.id}`} style={{ textDecoration: "none" }}>
+                        <Button sx={{ color: "white" }}>View More</Button>
                       </Link>
                     </CardActions>
                   </Card>
@@ -142,33 +133,43 @@ const Stories = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h5" component="h5">
+            <Typography
+              id="modal-modal-title"
+              variant="h5"
+              component="h5"
+              sx={{ 
+                textAlign: "center",
+                color: (theme) =>
+                  theme.palette.mode === "light"
+                    ? "primary.light"
+                    : "primary.light",
+                //  color: "Black",
+                 pb: { xs: 5, sm: 5 } }} // Center align and change text color to white
+            >
               New Story
             </Typography>
-            <Grid
-              container
-              rowSpacing={1}
-              columnSpacing={{ xs: 1, sm: 2, md: 1 }}
-            >
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
               {new_story.map((story) => (
                 <Grid item xs={12} sm={6} md={6} key={story.id}>
                   <Card
                     sx={{
                       maxWidth: 345,
                       m: { xs: 1, sm: 0 },
+                      bgcolor: story.bgcolor, // Set background color based on story data
+                      pl: { xs: 5, sm: 5 }
                     }}
                   >
                     <CardContent>
-                      <Typography gutterBottom variant="h7" component="div">
+                      <Typography gutterBottom variant="h7" component="div" sx={{ color: "white" }}>
                         {story.title}
                       </Typography>
-                      <Typography variant="body3" color="text.secondary">
+                      <Typography variant="body3" sx={{ color: "white" }}>
                         {story.desc}
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Link to={`/${story.link}`}>
-                        <Button>Use {story.title}</Button>
+                      <Link to={`/${story.link}`} style={{ textDecoration: "none" }}>
+                        <Button sx={{ color: "white" }}>Use {story.title}</Button>
                       </Link>
                     </CardActions>
                   </Card>
@@ -177,7 +178,6 @@ const Stories = () => {
             </Grid>
           </Box>
         </Modal>
-        {/* <NewStory></NewStory> */}
       </Box>
     </Container>
   );
