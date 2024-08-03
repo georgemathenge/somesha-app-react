@@ -18,7 +18,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
-import { genres, steps, mainCharacters } from "../data";
+import {
+  genres,
+  steps,
+  mainCharacters,
+  unsuitableSubGenresForKids
+} from "../data";
 import { BASEURL } from "./api-service.js";
 import { alpha } from "@mui/material";
 
@@ -213,6 +218,16 @@ function NewStory() {
       });
   };
 
+
+const isSubGenreSuitable = (subGenre) => {
+  const userAge = formData.age; // Assuming you have the user's age in formData
+  if (userAge >= 0 && userAge <= 12) {
+    return !unsuitableSubGenresForKids.includes(subGenre);
+  }
+  return true;
+};
+
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -322,13 +337,13 @@ function NewStory() {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {Object.keys(genres[formData.favouriteGenre] || {}).map(
-                    (subGenre) => (
+                  {Object.keys(genres[formData.favouriteGenre] || {})
+                    .filter(isSubGenreSuitable)
+                    .map((subGenre) => (
                       <MenuItem key={subGenre} value={subGenre}>
                         {subGenre}
                       </MenuItem>
-                    )
-                  )}
+                    ))}
                 </Select>
                 {errors.subGenre && (
                   <FormHelperText>{errors.subGenre}</FormHelperText>

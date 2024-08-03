@@ -313,6 +313,7 @@ export const steps = [
     "Reading Preference",
     "Character Preference",
     "Additional Preferences",
-    // "Accesibility and Format Preference",
-    // "Additional Preferences",
+    
 ];
+
+export const unsuitableSubGenresForKids = ["Horror", "Fantasy", "Mystery"];

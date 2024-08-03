@@ -55,12 +55,10 @@ const getTheme = (mode) => createTheme({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route path='/home' element={<Home />} />
+      <Route  index element={<Home />} />
       <Route path='/create-new' element={<NewStory />} />
       <Route path="/view-story/:storyId" element={<ViewStory />} />
       <Route path='/stories' element={<Stories />} />
-
-
     </Route>
   )
 );
@@ -70,18 +68,14 @@ function App() {
 
   const theme = getTheme(mode);
 
-  const toggleTheme = () => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-  };
+  // const toggleTheme = () => {
+  //   setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  // };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
-        <IconButton onClick={toggleTheme} color="inherit">
-          {mode === 'light' ? <Brightness4 /> : <Brightness7 />}
-        </IconButton>
-      </div>
+      
       <RouterProvider router={router} />
     </ThemeProvider>
   );
