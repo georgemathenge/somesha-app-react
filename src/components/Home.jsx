@@ -48,7 +48,7 @@ function Home() {
           <Stack
             spacing={2}
             useFlexGap
-            sx={{ width: { xs: "100%", sm: "70%" } }}
+            sx={{ width: { xs: "100%", sm: "80%" } }}
           >
             <Typography
               variant="h1"
@@ -58,6 +58,8 @@ function Home() {
                 alignSelf: "center",
                 textAlign: "center",
                 fontSize: "clamp(3.5rem, 10vw, 4rem)",
+                pt: { xs: 10, sm: 10, md:10 },
+
               }}
             >
               Welcome to Somesha &nbsp;
@@ -75,23 +77,27 @@ function Home() {
                 with AI
               </Typography>
             </Typography>
-            <Typography
+            <Typography variant="h6"
               textAlign="center"
               color="text.primary"
               sx={{
                 alignSelf: "center",
-                width: { sm: "100%", md: "80%" },
+                width: { sm: "100%",
+                   md: "80%", 
+                 },
+                 fontSize:"20",
+                 pt: { xs: 10, sm: 5, md:5 },
                 color: (theme) =>
                   theme.palette.mode === "light"
                     ? "primary.light"
                     : "primary.light",
               }}
             >
-           {`
-    Our application is designed to support early childhood development with a focus on numeracy and comprehension skills.
-    Targeting young learners, the app provides engaging and interactive educational content tailored to enhance foundational skills in a fun and immersive way.
-    By leveraging the power of artificial intelligence, the application offers personalized learning experiences that adapt to each child's unique needs and learning pace.
-  `}
+         
+    Our application is designed to support early childhood development with a focus on numeracy and comprehension skills. <br/><br/>
+    Targeting young learners, the app provides engaging and interactive educational content tailored to enhance foundational skills in a fun and immersive way. <br/><br/>
+    By leveraging the power of artificial intelligence, the application offers personalized learning experiences that adapt to each child's unique needs and learning pace.<br/><br/>
+
             </Typography>
             {/* <Stack
               direction={{ xs: "column", sm: "row" }}
