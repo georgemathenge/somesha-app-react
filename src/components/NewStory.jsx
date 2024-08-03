@@ -20,6 +20,8 @@ import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
 import { genres, steps, mainCharacters } from "../data";
 import { BASEURL } from "./api-service.js";
+import { alpha } from "@mui/material";
+
 
 function NewStory() {
   const [activeStep, setActiveStep] = useState(0);
@@ -502,6 +504,15 @@ function NewStory() {
   };
 
   return (
+    <Box sx={(theme) =>({
+      width: "100%",
+      backgroundImage:
+      theme.palette.mode === "light"
+        ? "linear-gradient(180deg, #CEE5FD, #FFF)"
+        : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
+    })}> 
+
+    <Container sx={{ width: "80%" }}>
     <Grid container spacing={2} justifyContent="center">
       <Grid item xs={12} sm={10} md={8}>
         <Box sx={{ width: "100%" }}>
@@ -647,6 +658,8 @@ function NewStory() {
         </Box>
       </Grid>
     </Grid>
+    </Container>
+    </Box>
   );
 }
 

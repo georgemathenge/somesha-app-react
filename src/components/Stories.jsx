@@ -5,6 +5,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { BASEURL } from "./api-service.js";
+import { alpha } from "@mui/material";
+
 
 const Stories = () => {
   const [data, setData] = useState([]);
@@ -31,6 +33,7 @@ const Stories = () => {
     },
   ];
 
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -45,6 +48,7 @@ const Stories = () => {
     boxShadow: 20,
     p: 4,
   };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,15 +69,25 @@ const Stories = () => {
   }, []);
 
   return (
-    <Container sx={{ width: "70%" }}>
-      <Box
-        sx={{
+    <Box  sx={(theme) =>({
+      width:"100%",
+      backgroundImage:
+      theme.palette.mode === "light"
+        ? "linear-gradient(180deg, #CEE5FD, #FFF)"
+        : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
+    })}>
+      <Container
+        sx={(theme) =>({
           position: "relative",
           flexDirection: "column",
           alignItems: "center",
           pt: { xs: 14, sm: 10 },
           pb: { xs: 5, sm: 5 },
-        }}
+          backgroundImage:
+          theme.palette.mode === "light"
+            ? "linear-gradient(180deg, #CEE5FD, #FFF)"
+            : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
+        })}
       >
         <Box
           sx={{
@@ -178,8 +192,8 @@ const Stories = () => {
             </Grid>
           </Box>
         </Modal>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
