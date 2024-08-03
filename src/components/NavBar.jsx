@@ -43,7 +43,7 @@ function NavBar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            Somesha API
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

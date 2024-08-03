@@ -7,7 +7,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { BASEURL } from "./api-service.js";
 import { alpha } from "@mui/material";
 
-
 const Stories = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,17 +21,16 @@ const Stories = () => {
       title: "My preferments",
       desc: "Add a new story from your recent preference",
       link: "user-preference",
-      bgcolor: "green",
+      bgcolor: "#F08080",
     },
     {
       id: 2, // Add an ID for mapping
       title: "New preferment",
       desc: "Add a new story from a new preference",
       link: "create-new",
-      bgcolor: "purple",
+      bgcolor: "#808000",
     },
   ];
-
 
   const style = {
     position: "absolute",
@@ -109,32 +107,38 @@ const Stories = () => {
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
               {data.map((story) => (
                 <Grid item xs={12} sm={6} md={4} key={story.id}>
-                  <Card sx={{ maxWidth: 345 }}>
-                    <CardMedia
-                      component="img"
-                      alt={story.title}
-                      height="200"
-                      image="/story6.jpeg"
-                      sx={{ objectFit: "cover" }}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">
-                        {story.title}
-                      </Typography>
-                      <Typography variant="h8" color="text.secondary">
-                        {story.category}
-                      </Typography>
-                      <Typography variant="body2" noWrap color="text.secondary">
-                        {story.description}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small">Share</Button>
-                      <Link to={`/view-story/${story.id}`} style={{ textDecoration: "none" }}>
+                  <Link to={`/view-story/${story.id}`} style={{ textDecoration: "none", display: "block" }}>
+                    <Card sx={{ 
+                      maxWidth: 345, 
+                      "&:hover": {
+                        boxShadow: 6,
+                        transform: "scale(1.05)"
+                      }
+                    }}>
+                      <CardMedia
+                        component="img"
+                        alt={story.title}
+                        height="200"
+                        image="/story6.jpeg"
+                        sx={{ objectFit: "cover" }}
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h6" component="div">
+                          {story.title}
+                        </Typography>
+                        <Typography variant="h8" color="text.secondary">
+                          {story.category}
+                        </Typography>
+                        <Typography variant="body2" noWrap color="text.secondary">
+                          {story.description}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small">Share</Button>
                         <Button sx={{ color: "white" }}>View More</Button>
-                      </Link>
-                    </CardActions>
-                  </Card>
+                      </CardActions>
+                    </Card>
+                  </Link>
                 </Grid>
               ))}
             </Grid>
@@ -155,38 +159,41 @@ const Stories = () => {
                 textAlign: "center",
                 color: (theme) =>
                   theme.palette.mode === "light"
-                    ? "primary.light"
-                    : "primary.light",
-                //  color: "Black",
-                 pb: { xs: 5, sm: 5 } }} // Center align and change text color to white
+                    ? "black"
+                    : "white",
+                pb: { xs: 5, sm: 5 },
+              }}
             >
               New Story
             </Typography>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
               {new_story.map((story) => (
                 <Grid item xs={12} sm={6} md={6} key={story.id}>
-                  <Card
-                    sx={{
-                      maxWidth: 345,
-                      m: { xs: 1, sm: 0 },
-                      bgcolor: story.bgcolor, // Set background color based on story data
-                      pl: { xs: 5, sm: 5 }
-                    }}
-                  >
-                    <CardContent>
-                      <Typography gutterBottom variant="h7" component="div" sx={{ color: "white" }}>
-                        {story.title}
-                      </Typography>
-                      <Typography variant="body3" sx={{ color: "white" }}>
-                        {story.desc}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Link to={`/${story.link}`} style={{ textDecoration: "none" }}>
+                  <Link to={`/${story.link}`} style={{ textDecoration: "none", display: "block" }}>
+                    <Card
+                      sx={{
+                        maxWidth: 345,
+                        m: { xs: 1, sm: 0 },
+                        bgcolor: story.bgcolor,
+                        "&:hover": {
+                          boxShadow: 6,
+                          transform: "scale(1.05)"
+                        }
+                      }}
+                    >
+                      <CardContent>
+                        <Typography gutterBottom variant="h7" component="div" sx={{ color: "white", fontSize: "1rem" }}>
+                          {story.title}
+                        </Typography>
+                        <Typography variant="body3" sx={{ color: "white", fontSize: "0.875rem" }}>
+                          {story.desc}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
                         <Button sx={{ color: "white" }}>Use {story.title}</Button>
-                      </Link>
-                    </CardActions>
-                  </Card>
+                      </CardActions>
+                    </Card>
+                  </Link>
                 </Grid>
               ))}
             </Grid>
