@@ -14,27 +14,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import AdbIcon from "@mui/icons-material/Adb";
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline} from '@mui/material';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
-import { RouterProvider } from 'react-router';
-
-const pages = ["Home", "Stories", "Blog"];
+const pages = ["Home", "Stories", "Create New"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-
-const getTheme = (mode) => createTheme({
-  palette: {
-    mode: mode, // 'light' or 'dark'
-    primary: {
-      main: '#86B6F6', // Customize your primary color
-      light: '#CED5DC', // Customize your primary light color
-    },
-    secondary: {
-      main: '#dc004e', // Customize your secondary color
-    },
-  },
-});
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -56,18 +37,15 @@ function NavBar() {
   };
 
   return (
-    <AppBar
-      position="static"
-      // sx={{color:'secondary'}}
-    >
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -109,27 +87,27 @@ function NavBar() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}
-                          >
+            >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     <Link
-                      to={`/${page.toLowerCase()}`}
+                      to={`/${page.toLowerCase().replace(" ", "-")}`}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
                       {page}
                     </Link>
                   </Typography>
                 </MenuItem>
-                      ))}
+              ))}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -147,6 +125,8 @@ function NavBar() {
             {pages.map((page) => (
               <Button
                 key={page}
+                component={Link}
+                to={`/${page.toLowerCase().replace(" ", "-")}`}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
@@ -189,4 +169,5 @@ function NavBar() {
     </AppBar>
   );
 }
+
 export default NavBar;

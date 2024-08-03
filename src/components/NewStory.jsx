@@ -455,36 +455,12 @@ function NewStory() {
             /> */}
           </form>
         );
-        return (
-          <form>
-            <TextField
-              name="favouriteSetting"
-              label="Favourite Setting"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              value={formData.favouriteSetting}
-              onChange={handleChange}
-              className="custom-textfield"
-            />
-            <TextField
-              name="timePeriodPreference"
-              label="Time Period Preference"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              value={formData.timePeriodPreference}
-              onChange={handleChange}
-              className="custom-textfield"
-            />
-          </form>
-        );
       case 3:
         return (
           <form>
             <TextField
               name="accessibilityNeeds"
-              label="Accessibility Needs"
+              label="Accessibility Need"
               variant="outlined"
               fullWidth
               margin="normal"
@@ -503,11 +479,6 @@ function NewStory() {
               onChange={handleChange}
               className="custom-textfield"
             />
-          </form>
-        );
-      case 4:
-        return (
-          <form>
             <TextField
               name="preferredLanguage"
               label="Language"
@@ -520,7 +491,7 @@ function NewStory() {
             />
           </form>
         );
-
+      
       default:
         return "Unknown step";
     }

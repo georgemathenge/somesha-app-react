@@ -60,7 +60,7 @@ function Home() {
                 fontSize: "clamp(3.5rem, 10vw, 4rem)",
               }}
             >
-              Our latest&nbsp;
+              Welcome to Somesha &nbsp;
               <Typography
                 component="span"
                 variant="h1"
@@ -72,26 +72,28 @@ function Home() {
                       : "primary.light",
                 }}
               >
-                products
+                with AI
               </Typography>
             </Typography>
             <Typography
               textAlign="center"
-              color="text.secondary"
+              color="text.primary"
               sx={{
                 alignSelf: "center",
                 width: { sm: "100%", md: "80%" },
                 color: (theme) =>
                   theme.palette.mode === "light"
-                    ? "primary.main"
+                    ? "primary.light"
                     : "primary.light",
               }}
             >
-              Explore our cutting-edge dashboard, delivering high-quality
-              solutions tailored to your needs. Elevate your experience with
-              top-tier features and services.
+           {`
+    Our application is designed to support early childhood development with a focus on numeracy and comprehension skills.
+    Targeting young learners, the app provides engaging and interactive educational content tailored to enhance foundational skills in a fun and immersive way.
+    By leveraging the power of artificial intelligence, the application offers personalized learning experiences that adapt to each child's unique needs and learning pace.
+  `}
             </Typography>
-            <Stack
+            {/* <Stack
               direction={{ xs: "column", sm: "row" }}
               alignSelf="center"
               spacing={1}
@@ -124,7 +126,7 @@ function Home() {
                 Terms & Conditions
               </Link>
               .
-            </Typography>
+            </Typography> */}
           </Stack>
         </Container>
       </Box>

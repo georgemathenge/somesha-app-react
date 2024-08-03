@@ -55,10 +55,12 @@ const getTheme = (mode) => createTheme({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route index element={<Home />} />
+      <Route path='/home' element={<Home />} />
       <Route path='/create-new' element={<NewStory />} />
       <Route path="/view-story/:storyId" element={<ViewStory />} />
       <Route path='/stories' element={<Stories />} />
+
+
     </Route>
   )
 );

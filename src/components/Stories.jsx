@@ -109,7 +109,7 @@ const Stories = () => {
                       component="img"
                       alt="green iguana"
                       height="200"
-                      image="/story2.jpeg"
+                      image="/story6.jpeg"
                       sx={{ objectFit: "cover" }}
                     />
                     <CardContent>

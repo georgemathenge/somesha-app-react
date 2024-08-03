@@ -266,39 +266,44 @@ export const genres = {
 
 export const mainCharacters= {
     King: [
-        "Humor and wit",
-        "Happy endings",
-        "Romantic entanglements",
-        "Social satire",
-        "Light-hearted themes",
+            "Palace",
+            "Dungeon",
+            "Tournament Grounds",
+            "Foreign Courts",
+            "Royal Yacht or Ship",
+            "Royal Theatre or Opera House"
     ],
     Queen: [
-        "Downfall of protagonists",
-        "Fatal flaws",
-        "Emotional suffering",
-        "Moral lessons",
-        "Catastrophic events",
+            "Castle",
+            "Royal Court",
+            "Throne Room",
+            "Banquet Hall",
+            "Garden",
+            "Summer Residence or Villa",
     ],
     Carpenter: [
-        "Mix of humor and tragedy",
-        "Complex characters",
-        "Ironic situations",
-        "Emotional depth",
-        "Mixed tone",
+            "Workshop",
+            "Village",
+            "Construction Site",
+            "Forest",
+            "Cottage",
+            "Market"
     ],
     Nurse: [
-        "Exaggerated situations",
-        "Physical comedy",
-        "Mistaken identities",
-        "Slapstick humor",
-        "Ridiculous scenarios",
+            "Hospital",
+            "Clinic",
+            "Battlefield",
+            "Nursing Home",
+            "Ambulance",
+            "Community Center"
     ],
     Teacher: [
-        "Exaggerated emotions",
-        "Clear moral distinctions",
-        "Sensational plots",
-        "Stock characters",
-        "Dramatic conflicts",
+            "School",
+            "Classroom",
+            "Library",
+            "University",
+            "Lecture Hall",
+            "Laboratory"
     ],
 }
 
@@ -307,7 +312,7 @@ export const steps = [
     "Basic Information",
     "Reading Preference",
     "Character Preference",
-    "Story Setting",
-    "Accesibility and Format Preference",
     "Additional Preferences",
+    // "Accesibility and Format Preference",
+    // "Additional Preferences",
 ];
