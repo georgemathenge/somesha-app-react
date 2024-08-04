@@ -11,7 +11,7 @@ const Footer = () => {
         width: "100%",
         color: (theme) =>
           theme.palette.mode === "light" ? "primary.light" : "primary.light",
-        backgroundColor: "rgba(4, 6, 7, 0.8)",
+        backgroundColor: "rgba(128, 128, 128)",
       }}
     >
       <Container
