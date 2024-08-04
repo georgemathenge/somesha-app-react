@@ -10,32 +10,31 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BASEURL } from "./api-service.js";
 const ViewStory = () => {
-    const [data, setData] = useState([]);
-    const [status, setStatus] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-const { storyId } = useParams();
-console.log(storyId)
-    useEffect(() => {
-      const fetchData = async () => {
-        
-        try {
-          // Replace this URL with your actual API endpoint
-          const response = await axios.get(
-            // `http://localhost:4000/api/v1/somesha/app/get/stories/${storyId}`
-            `${BASEURL}/api/v1/somesha/app/get/stories/${storyId}`
-          );
-          setData(response.data.data);// Adjust based on your API structure
-     setStatus(response.data.status)
-        } catch (error) {
-          setError(error);
-        } finally {
-          setLoading(false);
-        }
-      };
+  const [data, setData] = useState([]);
+  const [status, setStatus] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { storyId } = useParams();
+  console.log(storyId);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Replace this URL with your actual API endpoint
+        const response = await axios.get(
+          // `http://localhost:4000/api/v1/somesha/app/get/stories/${storyId}`
+          `${BASEURL}/api/v1/somesha/app/get/stories/${storyId}`
+        );
+        setData(response.data.data); // Adjust based on your API structure
+        setStatus(response.data.status);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchData();
-    }, [storyId]);
+    fetchData();
+  }, [storyId]);
 
   return (
     <Box
@@ -106,31 +105,23 @@ console.log(storyId)
         {error && <div>Error: {error.message}</div>}
         {status !== 230 && <div>No stories Found</div>}
 
-        {!loading &&
-          !error &&
-          status ===
-            230 &&(
-              <Grid
-                container
-                rowSpacing={1}
-                columnSpacing={{ xs: 1, sm: 2, md: 1 }}
-              >
-                <Grid item xs={12} sm={12} md={12}>
-                  <>
-                    <Typography variant="h6">{data.title}</Typography>
-                    <Typography variant="h7">{data.category}</Typography>
-                    <Typography variant="body2">{data.description}</Typography>
-                  </>
-                </Grid>
-                {/* <Grid item xs={1} sm={2} md={6}>
+        {!loading && !error && status === 230 && (
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 1 }}
+          >
+            <Grid item xs={12} sm={12} md={12}>
               <>
                 <Typography variant="h6">{data.title}</Typography>
                 <Typography variant="h7">{data.category}</Typography>
                 <Typography variant="body2">{data.description}</Typography>
+                <Typography variant="h7" sx={{pt:{xs:1, sm:5,md:2}}}  >Questions</Typography>
+                <Typography variant="body2">{data.questions}</Typography>
               </>
-            </Grid> */}
-              </Grid>
-            )}
+            </Grid>
+          </Grid>
+        )}
       </Container>
       <Container
         sx={{

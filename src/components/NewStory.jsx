@@ -22,11 +22,10 @@ import {
   genres,
   steps,
   mainCharacters,
-  unsuitableSubGenresForKids
+  unsuitableSubGenresForKids,
 } from "../data";
 import { BASEURL } from "./api-service.js";
 import { alpha } from "@mui/material";
-
 
 function NewStory() {
   const [activeStep, setActiveStep] = useState(0);
@@ -76,13 +75,7 @@ function NewStory() {
       culturalPreference: "",
     });
   };
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -102,37 +95,9 @@ function NewStory() {
     });
   };
 
-  //  const [filteredGenres, setFilteredGenres] = useState(genres);
-
-  //  const handleAgeChange = (event) => {
-  //    const newAge = event.target.value;
-  //    setAge(newAge);
-
-  //    // Filter genres based on age
-  //    const newFilteredGenres = {};
-  //    for (const [genre, subGenres] of Object.entries(genres)) {
-  //      newFilteredGenres[genre] = {};
-  //      for (const [subGenre, themes] of Object.entries(subGenres)) {
-  //        if (newAge >= 0 && newAge <= 10 && subGenre === "Horror") {
-  //          continue; // Exclude restricted sub-genres
-  //        }
-  //        newFilteredGenres[genre][subGenre] = themes;
-  //      }
-  //    }
-
-  //    setFilteredGenres(newFilteredGenres);
-  //    // Reset formData when age changes
-  //    setFormData({
-  //      favouriteGenre: "",
-  //      favouriteSubGenre: "",
-  //      favouriteTheme: "",
-  //    });
-  //  };
-
   const validateStep = () => {
     let newErrors = {};
     let valid = true;
-
 
     if (activeStep === 0) {
       if (!formData.fullName) {
@@ -185,7 +150,7 @@ function NewStory() {
   };
   const isStepOptional = (step) => {
     // Define your logic for optional steps here
-    return step === 1;
+    return step === 3;
   };
 
   const isStepSkipped = (step) => {
@@ -218,15 +183,13 @@ function NewStory() {
       });
   };
 
-
-const isSubGenreSuitable = (subGenre) => {
-  const userAge = formData.age; // Assuming you have the user's age in formData
-  if (userAge >= 0 && userAge <= 12) {
-    return !unsuitableSubGenresForKids.includes(subGenre);
-  }
-  return true;
-};
-
+  const isSubGenreSuitable = (subGenre) => {
+    const userAge = formData.age; // Assuming you have the user's age in formData
+    if (userAge >= 0 && userAge <= 12) {
+      return !unsuitableSubGenresForKids.includes(subGenre);
+    }
+    return true;
+  };
 
   const getStepContent = (step) => {
     switch (step) {
@@ -450,11 +413,13 @@ const isSubGenreSuitable = (subGenre) => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {mainCharacters[formData.preferredMainCharacter].map((theme) => (
-                    <MenuItem key={theme} value={theme}>
-                      {theme}
-                    </MenuItem>
-                  ))}
+                  {mainCharacters[formData.preferredMainCharacter].map(
+                    (theme) => (
+                      <MenuItem key={theme} value={theme}>
+                        {theme}
+                      </MenuItem>
+                    )
+                  )}
                 </Select>
                 {errors.subGenre && (
                   <FormHelperText>{errors.subGenre}</FormHelperText>
@@ -512,168 +477,178 @@ const isSubGenreSuitable = (subGenre) => {
             />
           </form>
         );
-      
+
       default:
         return "Unknown step";
     }
   };
 
   return (
-    <Box sx={(theme) =>({
-      width: "100%",
-      backgroundImage:
-      theme.palette.mode === "light"
-        ? "linear-gradient(180deg, #CEE5FD, #FFF)"
-        : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
-    })}> 
-
-    <Container sx={{ width: "80%" }}>
-    <Grid container spacing={2} justifyContent="center">
-      <Grid item xs={12} sm={10} md={8}>
-        <Box sx={{ width: "100%" }}>
-          <Box
-            sx={{
-              flexDirection: "column",
-              alignItems: "center",
-              pt: { xs: 14, sm: 10 },
-              pb: { xs: 5, sm: 5 },
-            }}
-          >
-            <Typography variant="h4" sx={{ pb: { sm: 3 } }}>
-              Let us create you that story
-            </Typography>
-            {formVisible && (
-              <Container
+    <Box
+      sx={(theme) => ({
+        width: "100%",
+        backgroundImage:
+          theme.palette.mode === "light"
+            ? "linear-gradient(180deg, #CEE5FD, #FFF)"
+            : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
+      })}
+    >
+      <Container sx={{ width: "100%" }}>
+        <Grid container spacing={2} justifyContent="center">
+          <Grid item xs={12} sm={10} md={8}>
+            <Box sx={{ width: "100%" }}>
+              <Box
                 sx={{
-                  bgcolor: "background.paper",
-                  border: "1px solid #999999",
-                  boxShadow: 10,
+                  flexDirection: "column",
+                  alignItems: "center",
+                  pt: { xs: 14, sm: 10 },
+                  pb: { xs: 5, sm: 5 },
                 }}
               >
-                <Stepper activeStep={activeStep}>
-                  {steps.map((label, index) => {
-                    const stepProps = {};
-                    const labelProps = {};
-                    if (isStepOptional(index)) {
-                      labelProps.optional = (
-                        <Typography variant="caption">Optional</Typography>
-                      );
-                    }
-                    if (isStepSkipped(index)) {
-                      stepProps.completed = false;
-                    }
-                    return (
-                      <Step key={label} {...stepProps}>
-                        <StepLabel {...labelProps}>{label}</StepLabel>
-                      </Step>
-                    );
-                  })}
-                </Stepper>
-                {activeStep === steps.length ? (
-                  <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                      All steps completed - you&apos;re finished
-                    </Typography>
-                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                      <Box sx={{ flex: "1 1 auto" }} />
-                      <Button onClick={handleReset}>Reset</Button>
-                      <Button
-                        disabled={submitted}
-                        onClick={handleSubmit}
-                        sx={{ ml: 1 }}
-                      >
-                        Submit
-                      </Button>
-                    </Box>
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                      Step {activeStep + 1}
-                    </Typography>
-                    {getStepContent(activeStep)}
-                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                      <Button
-                        color="inherit"
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        sx={{ mr: 1 }}
-                      >
-                        Back
-                      </Button>
-                      <Box sx={{ flex: "1 1 auto" }} />
-                      {/* {isStepOptional(activeStep) && (
+                <Typography variant="h4" sx={{ pb: { sm: 3 } }}>
+                  Let us create you that story
+                </Typography>
+                {formVisible && (
+                  <Container
+                    sx={{
+                      bgcolor: "background.paper",
+                      border: "1px solid #999999",
+                      boxShadow: 10,
+                    }}
+                  >
+                    <Stepper activeStep={activeStep}>
+                      {steps.map((label, index) => {
+                        const stepProps = {};
+                        const labelProps = {};
+                        if (isStepOptional(index)) {
+                          labelProps.optional = (
+                            <Typography variant="caption">Optional</Typography>
+                          );
+                        }
+                        if (isStepSkipped(index)) {
+                          stepProps.completed = false;
+                        }
+                        return (
+                          <Step key={label} {...stepProps}>
+                            <StepLabel {...labelProps}>{label}</StepLabel>
+                          </Step>
+                        );
+                      })}
+                    </Stepper>
+                    {activeStep === steps.length ? (
+                      <React.Fragment>
+                        <Typography sx={{ mt: 2, mb: 1 }}>
+                          All steps completed - you&apos;re finished
+                        </Typography>
+                        <Box
+                          sx={{ display: "flex", flexDirection: "row", pt: 2 }}
+                        >
+                          <Box sx={{ flex: "1 1 auto" }} />
+                          <Button onClick={handleReset}>Reset</Button>
+                          <Button
+                            disabled={submitted}
+                            onClick={handleSubmit}
+                            sx={{ ml: 1 }}
+                          >
+                            Submit
+                          </Button>
+                        </Box>
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <Typography sx={{ mt: 2, mb: 1 }}>
+                          Step {activeStep + 1}
+                        </Typography>
+                        {getStepContent(activeStep)}
+                        <Box
+                          sx={{ display: "flex", flexDirection: "row", pt: 2 }}
+                        >
+                          <Button
+                            color="inherit"
+                            disabled={activeStep === 0}
+                            onClick={handleBack}
+                            sx={{ mr: 1 }}
+                          >
+                            Back
+                          </Button>
+                          <Box sx={{ flex: "1 1 auto" }} />
+                          {/* {isStepOptional(activeStep) && (
                 <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
                   Skip
                 </Button>
               )} */}
-                      <Button onClick={handleNext}>
-                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                      </Button>
-                    </Box>
-                  </React.Fragment>
+                          <Button onClick={handleNext}>
+                            {activeStep === steps.length - 1
+                              ? "Finish"
+                              : "Next"}
+                          </Button>
+                        </Box>
+                      </React.Fragment>
+                    )}
+                  </Container>
                 )}
-              </Container>
-            )}
-            <div>
-              {loading ? (
-                <Backdrop
-                  sx={{
-                    color: "#fff",
-                    zIndex: (theme) => theme.zIndex.drawer + 1,
-                  }}
-                  open={loading}
-                >
-                  <CircularProgress color="inherit" />
-                </Backdrop>
-              ) : responseStatus === 200 ? (
                 <div>
-                  <Typography variant="h5">Here is your story:</Typography>
-                  <Box>
-                    {responseData?.title ? (
-                      <Typography variant="h6">
-                        {" "}
-                        Title: {responseData.title}
-                      </Typography>
-                    ) : (
-                      <Typography variant="h6">Title not available</Typography>
-                    )}
-                    {responseData?.story ? (
-                      <Container>{responseData.story}</Container>
-                    ) : (
-                      <Typography variant="body1">
-                        Story content not available
-                      </Typography>
-                    )}{" "}
-                    {responseData?.questions ? (
+                  {loading ? (
+                    <Backdrop
+                      sx={{
+                        color: "#fff",
+                        zIndex: (theme) => theme.zIndex.drawer + 1,
+                      }}
+                      open={loading}
+                    >
+                      <CircularProgress color="inherit" />
+                    </Backdrop>
+                  ) : responseStatus === 200 ? (
+                    <div>
+                      <Typography variant="h5">Here is your story:</Typography>
                       <Box>
-                        <Typography variant="h7">Questions</Typography>
-                        <Container>{responseData.questions}</Container>
+                        {responseData?.title ? (
+                          <Typography variant="h6">
+                            {" "}
+                            Title: {responseData.title}
+                          </Typography>
+                        ) : (
+                          <Typography variant="h6">
+                            Title not available
+                          </Typography>
+                        )}
+                        {responseData?.story ? (
+                          <Container>{responseData.story}</Container>
+                        ) : (
+                          <Typography variant="body1">
+                            Story content not available
+                          </Typography>
+                        )}{" "}
+                        {responseData?.questions ? (
+                          <Box>
+                            <Typography variant="h7">Questions</Typography>
+                            <Container>{responseData.questions}</Container>
+                          </Box>
+                        ) : (
+                          <Typography variant="body1">
+                            Story questions not available
+                          </Typography>
+                        )}
                       </Box>
-                    ) : (
-                      <Typography variant="body1">
-                        Story questions not available
+                      <Button>Submit</Button>
+                    </div>
+                  ) : responseStatus === 400 || responseStatus === 500 ? (
+                    <div>
+                      <Typography variant="body2">
+                        An error occurred while generating your story. Status
+                        code:
+                        {responseStatus}
                       </Typography>
-                    )}
-                  </Box>
-                  <Button>Submit</Button>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
-              ) : responseStatus === 400 || responseStatus === 500 ? (
-                <div>
-                  <Typography variant="body2">
-                    An error occurred while generating your story. Status code:
-                    {responseStatus}
-                  </Typography>
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-          </Box>
-        </Box>
-      </Grid>
-    </Grid>
-    </Container>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
     </Box>
   );
 }

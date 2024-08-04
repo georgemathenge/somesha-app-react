@@ -261,49 +261,106 @@ export const genres = {
             "Enchanting settings",
         ],
     },
+   
 
-};
 
-export const mainCharacters= {
+    "Numeracy": {
+        "Counting and Numbers": [
+            "Basic counting (1-10, 1-20)",
+            "Larger numbers and sequences",
+            "Odd and even numbers"
+        ],
+        "Addition and Subtraction": [
+            "Simple addition",
+            "Simple subtraction",
+            "Word problems involving addition and subtraction"
+        ],
+        "Multiplication and Division": [
+            "Simple multiplication",
+            "Simple division",
+            "Word problems involving multiplication and division"
+        ],
+        "Shapes and Geometry": [
+            "Basic shapes (circle, square, triangle, etc.)",
+            "3D shapes",
+            "Symmetry and patterns"
+        ],
+        "Measurement": [
+            "Length, height, and width",
+            "Weight and volume",
+            "Time and temperature"
+        ],
+        "Fractions and Decimals": [
+            "Basic fractions",
+            "Comparing and ordering fractions",
+            "Simple decimals and percentages"
+        ],
+        "Money and Financial Literacy": [
+            "Identifying coins and notes",
+            "Simple transactions and change",
+            "Basic budgeting"
+        ],
+        "Data and Graphs": [
+            "Reading bar graphs and charts",
+            "Simple statistics (mean, median, mode)",
+            "Probability and simple data analysis"
+        ],
+        "Problem-Solving and Logical Thinking": [
+            "Puzzles and riddles",
+            "Sequencing and pattern recognition",
+            "Logical reasoning problems"
+        ],
+        "Numeracy in Everyday Life": [
+            "Cooking and recipes",
+            "Shopping and pricing",
+            "Travel and scheduling"
+        ]
+    }
+}
+
+
+
+
+export const mainCharacters = {
     King: [
-            "Palace",
-            "Dungeon",
-            "Tournament Grounds",
-            "Foreign Courts",
-            "Royal Yacht or Ship",
-            "Royal Theatre or Opera House"
+        "Palace",
+        "Dungeon",
+        "Tournament Grounds",
+        "Foreign Courts",
+        "Royal Yacht or Ship",
+        "Royal Theatre or Opera House"
     ],
     Queen: [
-            "Castle",
-            "Royal Court",
-            "Throne Room",
-            "Banquet Hall",
-            "Garden",
-            "Summer Residence or Villa",
+        "Castle",
+        "Royal Court",
+        "Throne Room",
+        "Banquet Hall",
+        "Garden",
+        "Summer Residence or Villa",
     ],
     Carpenter: [
-            "Workshop",
-            "Village",
-            "Construction Site",
-            "Forest",
-            "Cottage",
-            "Market"
+        "Workshop",
+        "Village",
+        "Construction Site",
+        "Forest",
+        "Cottage",
+        "Market"
     ],
     Nurse: [
-            "Hospital",
-            "Clinic",
-            "Battlefield",
-            "Nursing Home",
-            "Ambulance",
-            "Community Center"
+        "Hospital",
+        "Clinic",
+        "Battlefield",
+        "Nursing Home",
+        "Ambulance",
+        "Community Center"
     ],
     Teacher: [
-            "School",
-            "Classroom",
-            "Library",
-            "University",
-            "Lecture Hall",
-            "Laboratory"
+        "School",
+        "Classroom",
+        "Library",
+        "University",
+        "Lecture Hall",
+        "Laboratory"
     ],
 }
 
@@ -313,7 +370,7 @@ export const steps = [
     "Reading Preference",
     "Character Preference",
     "Additional Preferences",
-    
+
 ];
 
 export const unsuitableSubGenresForKids = ["Horror", "Fantasy", "Mystery"];
