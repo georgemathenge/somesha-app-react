@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { Box, Container, Typography, Modal, Grid, Card, CardActions, CardContent, CardMedia, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Modal,
+  Grid,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+} from "@mui/material";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { BASEURL } from "./api-service.js";
 import { alpha } from "@mui/material";
+import VoiceCommand from "./VoiceCommand.jsx";
+import TextToSpeechComponent from "./TextToSpeechComponent.jsx";
 
 const Stories = () => {
   const [data, setData] = useState([]);
@@ -19,14 +32,14 @@ const Stories = () => {
     {
       id: 1, // Add an ID for mapping
       title: "My preferments",
-      desc: "Add a new story from your recent preference",
+      desc: "Add a story based on your preference",
       link: "user-preference",
       bgcolor: "#F08080",
     },
     {
       id: 2, // Add an ID for mapping
       title: "New preferment",
-      desc: "Add a new story from a new preference",
+      desc: "Add a story from a new preference",
       link: "create-new",
       bgcolor: "#808000",
     },
@@ -40,13 +53,12 @@ const Stories = () => {
     alignItems: "center",
     pt: { xs: 2, sm: 10 },
     transform: "translate(-50%, -50%)",
-    width: '100vh',
+    width: "100vh",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 20,
     p: 4,
   };
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,24 +79,26 @@ const Stories = () => {
   }, []);
 
   return (
-    <Box  sx={(theme) =>({
-      width:"100%",
-      backgroundImage:
-      theme.palette.mode === "light"
-        ? "linear-gradient(180deg, #CEE5FD, #FFF)"
-        : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
-    })}>
+    <Box
+      sx={(theme) => ({
+        width: "100%",
+        backgroundImage:
+          theme.palette.mode === "light"
+            ? "linear-gradient(180deg, #CEE5FD, #FFF)"
+            : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
+      })}
+    >
       <Container
-        sx={(theme) =>({
+        sx={(theme) => ({
           position: "relative",
           flexDirection: "column",
           alignItems: "center",
           pt: { xs: 14, sm: 10 },
           pb: { xs: 5, sm: 5 },
           backgroundImage:
-          theme.palette.mode === "light"
-            ? "linear-gradient(180deg, #CEE5FD, #FFF)"
-            : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
+            theme.palette.mode === "light"
+              ? "linear-gradient(180deg, #CEE5FD, #FFF)"
+              : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
         })}
       >
         <Box
@@ -99,22 +113,33 @@ const Stories = () => {
           <Button onClick={handleOpen}>
             <AddIcon /> Add New
           </Button>
+          <VoiceCommand />
+          <TextToSpeechComponent />
         </Box>
         <Container>
           {loading && <div>Loading...</div>}
           {error && <div>Error: {error.message}</div>}
           {!loading && !error && (
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 1 }}
+            >
               {data.map((story) => (
                 <Grid item xs={12} sm={6} md={4} key={story.id}>
-                  <Link to={`/view-story/${story.id}`} style={{ textDecoration: "none", display: "block" }}>
-                    <Card sx={{ 
-                      maxWidth: 345, 
-                      "&:hover": {
-                        boxShadow: 6,
-                        transform: "scale(1.05)"
-                      }
-                    }}>
+                  <Link
+                    to={`/view-story/${story.id}`}
+                    style={{ textDecoration: "none", display: "block" }}
+                  >
+                    <Card
+                      sx={{
+                        maxWidth: 345,
+                        "&:hover": {
+                          boxShadow: 6,
+                          transform: "scale(1.05)",
+                        },
+                      }}
+                    >
                       <CardMedia
                         component="img"
                         alt={story.title}
@@ -129,7 +154,11 @@ const Stories = () => {
                         <Typography variant="h8" color="text.secondary">
                           {story.category}
                         </Typography>
-                        <Typography variant="body2" noWrap color="text.secondary">
+                        <Typography
+                          variant="body2"
+                          noWrap
+                          color="text.secondary"
+                        >
                           {story.description}
                         </Typography>
                       </CardContent>
@@ -155,42 +184,58 @@ const Stories = () => {
               id="modal-modal-title"
               variant="h5"
               component="h5"
-              sx={{ 
+              sx={{
                 textAlign: "center",
                 color: (theme) =>
-                  theme.palette.mode === "light"
-                    ? "black"
-                    : "white",
+                  theme.palette.mode === "light" ? "black" : "white",
                 pb: { xs: 5, sm: 5 },
               }}
             >
               New Story
             </Typography>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 1 }}
+            >
               {new_story.map((story) => (
                 <Grid item xs={12} sm={6} md={6} key={story.id}>
-                  <Link to={`/${story.link}`} style={{ textDecoration: "none", display: "block" }}>
+                  <Link
+                    to={`/${story.link}`}
+                    style={{ textDecoration: "none", display: "block" }}
+                  >
                     <Card
                       sx={{
                         maxWidth: 345,
+                        maxHeight: 400,
                         m: { xs: 1, sm: 0 },
                         bgcolor: story.bgcolor,
                         "&:hover": {
                           boxShadow: 6,
-                          transform: "scale(1.05)"
-                        }
+                          transform: "scale(1.05)",
+                        },
                       }}
                     >
                       <CardContent>
-                        <Typography gutterBottom variant="h7" component="div" sx={{ color: "white", fontSize: "1rem" }}>
+                        <Typography
+                          gutterBottom
+                          variant="h7"
+                          component="div"
+                          sx={{ color: "white", fontSize: "1rem" }}
+                        >
                           {story.title}
                         </Typography>
-                        <Typography variant="body3" sx={{ color: "white", fontSize: "0.875rem" }}>
+                        <Typography
+                          variant="body3"
+                          sx={{ color: "white", fontSize: "0.875rem" }}
+                        >
                           {story.desc}
                         </Typography>
                       </CardContent>
                       <CardActions>
-                        <Button sx={{ color: "white" }}>Use {story.title}</Button>
+                        <Button sx={{ color: "white" }}>
+                          Use {story.title}
+                        </Button>
                       </CardActions>
                     </Card>
                   </Link>

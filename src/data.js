@@ -264,7 +264,7 @@ export const genres = {
    
 
 
-    "Numeracy": {
+    "Numeracy Literature": {
         "Counting and Numbers": [
             "Basic counting (1-10, 1-20)",
             "Larger numbers and sequences",
@@ -373,4 +373,4 @@ export const steps = [
 
 ];
 
-export const unsuitableSubGenresForKids = ["Horror", "Fantasy", "Mystery"];
+export const unsuitableSubGenresForKids = ["Horror", "Fantasy", "Mystery","True Crime","Romance","Tragedy"];
